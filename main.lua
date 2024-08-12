@@ -49,6 +49,9 @@ mod:AddCallback(
                 Isaac.Spawn(EntityType.ENTITY_ATTACKFLY, 1, 0, position, Vector(0, 0), nil)
             end
         end
+
+        local camera = Game():GetRoom():GetCamera()
+        camera:SnapToPosition(Isaac.GetPlayer(0).Position)
     end
 )
 
@@ -58,7 +61,7 @@ mod:AddCallback(
     ---@param cacheFlag CacheFlag
     function(_, player, cacheFlag)
         if cacheFlag == CacheFlag.CACHE_SIZE then
-            -- player.Size = player.Size / 2
+            player.Size = player.Size / 2
             player.SpriteScale = player.SpriteScale / 2
         elseif cacheFlag == CacheFlag.CACHE_RANGE then
             player.TearHeight = player.TearHeight / 2
@@ -110,6 +113,17 @@ mod:AddCallback(
             projectile.Scale = projectile.Scale / 2
             projectile.Velocity = projectile.Velocity / 2
             projectile.Height = projectile.Height / 2
+        end
+    end
+)
+
+mod:AddCallback(
+    ModCallbacks.MC_POST_KNIFE_UPDATE,
+    ---@param knife EntityKnife
+    function(_, knife)
+        if knife.FrameCount == 0 then
+            knife.Size = knife.Size * 0.75
+            knife.SpriteScale = knife.SpriteScale * 0.75
         end
     end
 )
