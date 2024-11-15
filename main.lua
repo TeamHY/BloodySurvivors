@@ -1,4 +1,4 @@
-local BloodySurvivors = RegisterMod("Survivors", 1)
+BloodySurvivors = RegisterMod("Survivors", 1)
 
 BloodySurvivors.G = Game()
 
